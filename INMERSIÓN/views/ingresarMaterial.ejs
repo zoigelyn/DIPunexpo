@@ -1,0 +1,276 @@
+<%- include ("partes/cabecera") %>
+<script src="/js/jspdf.min.js"></script>
+<script src="/js/jspdf.debug.js"></script>
+<script >
+
+      function addWaterMark(doc){
+            var totalPages = doc.internal.getNumberOfPages();
+            for ( var i=1; i<=totalPages; i++) {
+                doc.setPage(i);
+                doc.setTextColor(150);
+                doc.text(50, doc.internal.pageSize.height - 30, 'Watermark');
+            
+            }
+            return doc;
+        }
+    
+        function genPDF(){
+var doc = new jsPDF();
+          /*
+          let inputFile = $('input[type="file"]');
+         doc = inputFile.prop("files")[0];
+         if (doc != '') {
+          alert(doc);
+         }else {
+         alert('fine');
+         }
+         */
+          //doc = addWaterMark(doc);
+          let inputFile = $('input[type="file"]');
+          doc = inputFile.prop("files")[0];
+          var file = doc.output();
+          alert(doc);
+        
+    }
+        
+</script>
+
+
+
+<body >
+    <%- include ("partes/navegacionB") %> 
+   <div class="content-page-container full-reset custom-scroll-containers">
+        <%- include ("partes/navegacionSuperiorB") %> 
+        <div class="container">
+            <div class="page-header">
+                <h1 class="all-tittles">UNEXPO DIP <small>Añadir libro</small></h1>
+            </div>
+        </div>
+       
+       <div class="container-fluid" style="margin: 50px 0;">
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-3">
+                    <img src="/assets/img/flat-book.png" alt="pdf" class="img-responsive center-box" style="max-width: 110px;">
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-8 text-justify lead">
+                    Bienvenido a la sección para agregar nuevos libros a la biblioteca, deberas de llenar todos los campos para poder registrar el libro
+                </div>
+            </div>
+        </div>
+        <p class="text-center">
+            <a onclick="javascript:genPDF()">aqui has click</a>
+        </p>
+        <div class="container-fluid">
+          
+            <form autocomplete="off" enctype="multipart/form-data"id="formato">
+              
+                <div class="container-flat-form">
+                    <div class="title-flat-form title-flat-blue">Nuevo libro</div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                            <legend><strong>Información básica</strong></legend><br>
+                          
+                            <div  class="group-material">
+                                <span>Categoría</span>
+                                <select id="tipo_l" name="tipo_l"  class="tooltips-general material-control" data-toggle="tooltip" data-placement="top" title="Elige la categoría del libro">
+                                    <option  disabled="" selected="">Selecciona una categoría</option>
+                                    <option>Libro</option>
+                                    <option>Revista</option>
+                                    <option>Trabajo de  grado</option>
+                
+                                </select>
+                            </div>
+                           
+                               
+                               
+                            <div class="row" >
+                            <div class="group-material col-md-6" id="cotas">
+                                <input id="cota" name="cota" type="text" class="tooltips-general material-control" placeholder="Escribe aquí la cota del libro" required="" maxlength="25" data-toggle="tooltip" data-placement="top" title="La cota del libro">
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Cota</label>
+                                
+                            </div>
+                            
+                                
+                                <div class="col-md-2" id="img-cota"></div>
+                                <div class="group-material col-md-4" id="ejemplares">
+                                   <input  id="ejemplar" name="ejemplar" type="number" class="tooltips-general material-control" placeholder="Escribe aquí los numeros de ejemplares" required="" maxlength="4" data-toggle="tooltip" data-placement="top" title="Numero de ejemplares">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>ejemplares</label>
+                                    
+                                </div>
+                            </div>
+                            <div id="cota-unica"></div>
+                            
+                            <div  class="group-material">
+                                <input id="titulo" name="titulo" type="text" class="tooltips-general material-control" placeholder="Escribe aquí el título o nombre del libro" required="" pattern="[Aá-z- 1-9-ñ]{1,}" maxlength="70" data-toggle="tooltip" data-placement="top" title="Escribe el título o nombre del libro">
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Título</label>
+                            </div>
+                            <div name="autor" class="group-material">
+                                <input id="autor" name="autor" type="text" class="tooltips-general material-control" placeholder="Escribe aquí el autor del libro" required="" pattern="[Áa-z- -ñ]{1,}" maxlength="70" data-toggle="tooltip" data-placement="top" title="Escribe el nombre del autor del libro">
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Autor</label>
+                            </div>
+                            <div name="volumen" class="group-material">
+                                <input id="volumen" name="volumen" type="number" class="tooltips-general material-control" placeholder="Escribe aquí el volumen del libro" required="" maxlength="50" data-toggle="tooltip" data-placement="top" title="Escribe el volumen del libro">
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Volumen</label>
+                            </div>
+
+                            <div  class="group-material">
+                                <input id="año" name="año" type="text" class="material-control tooltips-general" placeholder="Escribe aquí el año del libro" required="" pattern="[0-9]{1,4}" maxlength="4" data-toggle="tooltip" data-placement="top" title="Solamente números, sin espacios">
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Año</label>
+                            </div>
+                            <div name="editorial" class="group-material">
+                                <input id="editorial" name="editorial" type="text" class="material-control tooltips-general" placeholder="Escribe aquí la editorial del libro" required="" pattern="[A-z- ]{1,}" maxlength="70" data-toggle="tooltip" data-placement="top" title="Editorial del libro">
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Editorial</label>
+                            </div>
+                           
+            
+                          <div class="row">
+                            <div class="group-material col-md-10" >
+                                <input id="pdf" type="file" name="pdf" class="tooltips-general material-control" data-toggle="tooltip" data-placement="top" title="Archivo PDF">
+                               
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Archivo PDF</label>
+                                 <p class="text-center" id="formato-pdf"> </p>
+                            </div>
+                            <div class="col-md-2" id="img-pdf"></div>
+                        </div>
+                            
+                            <p class="text-center">
+                                <button  type="reset" class="btn btn-info" style="margin-right: 20px;"><div><i class="zmdi zmdi-roller"></i></div> &nbsp;&nbsp; Limpiar</button>
+                                <button  type="submit" class="btn btn-primary" ><div id="estatus">
+                            <i class="zmdi zmdi-floppy"></i>
+                               </div>  &nbsp;&nbsp; Guardar</button>
+                                
+                               <div id="mensaje"></div>
+                           </p>
+                        
+                        </div>
+                        
+                    </div>
+                </div>
+            </form>
+            
+            
+       
+        </div>
+        
+        <script>
+            $(function () {
+        
+                let inputFile = $('input[type="file"]');
+                let formato = $('form#formato');
+                let inputCota = $('input#cota');
+                let inputEjemplar = $('input#ejemplar');
+                let divEjemplares = $('div#ejemplares');
+                let divCotas = $('div#cotas');
+        
+                inputFile.on('change', function() {
+                    var ext = inputFile.val().split('.').pop().toLowerCase();
+                    if (inputFile.val() != '') {
+                         if(ext === "pdf"){
+                             var dato_archivo = inputFile.prop("files")[0];
+                             $('p#formato-pdf').html('');
+                             $('div#img-pdf').html(`<img src="/assets/img/satisfactorio.png" width= "20" height= "20">`)
+                    
+                         }else{
+                            $('p#formato-pdf').html(`<p>Debe ser formato pdf</p>`);
+                            $('div#img-pdf').html(`<img src="/assets/icons/notificacion-error.ico" width= "20" height= "20">`);
+                          
+                         }
+                        }
+                    });
+                    inputCota.on('change', function () {
+                        var formData = new FormData();
+                        formData.append("cota", inputCota.val());
+                    $.ajax({
+                        
+                        url: '/bibliotecario/ec',
+                        type: 'POST',
+                        data:  formato.serialize(),
+                        processData: false
+                        
+                    })
+                    .done(function(res){
+                        if (res === ''){
+                         $('div#cota-unica').html('');
+                          $('div#img-cota').html(`<img src="/assets/img/satisfactorio.png" width= "20" height= "20">`);  
+                        }else{
+                        $('div#cota-unica').html(`<p>${res}</p>`);
+                        $('div#img-cota').html(`<img src="/assets/icons/notificacion-error.ico" width= "20" height= "20">`);
+                        }
+
+                    })
+                    .fail(function(error){
+                        $('div#cota-unica').html(`<p>Ha ocurrido un error</p>`);
+                    });
+                });
+                
+                inputEjemplar.on('change', function(){
+                    
+                    if( inputEjemplar.val() > 1 ) {
+                        divEjemplares.html('');
+                        divCotas.html('');
+                        for (var i=1; i<=inputEjemplar.val(); i++ ){
+                            divEjemplares.append(` 
+                            <input value="${i}"  id="ejemplar" name="ejemplar" type="number" class="tooltips-general material-control" placeholder="Escribe aquí los numeros de ejemplares" required="" maxlength="4" data-toggle="tooltip" data-placement="top" title="Numero de ejemplares">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>ejemplares</label>`);
+                            divCotas.append(`
+                            <input id="cota-${i}" name="cota-${i}" type="text" class="tooltips-general material-control" placeholder="Escribe aquí la cota ${i} del libro" required="" maxlength="25" data-toggle="tooltip" data-placement="top" title="La cota ${i} del libro">
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Cota ${i}</label>
+                                `);
+                    
+
+                        }
+                    }
+                });
+
+                formato.on('submit', function (e) {
+                    e.preventDefault();
+                   alert('vacio');
+                   
+                    $.ajax({
+                        /*beforeSend: function (){
+                            $('div#estatus').html('');
+                            $('div#estatus').spin({radius: 3, width: 2, height: 2, length: 4});
+                        },*/
+                        url: '/bibliotecario/insert',
+                        type: 'POST',
+                        data: formato.serialize(),
+                        processData: false
+                        
+                    })
+                    .done(function(res){
+                        $('div#estatus').html(`<img src="/assets/img/satisfactorio.png"width= "20" height= "20">`);
+                        $('div#mensaje').html(`<p>${res}</p>`);
+
+                    })
+                    .fail(function(error){
+                        $('div#estatus').html(`<img src="/assets/icons/notificacion-error.ico"width= "20" height= "20">`);
+                        console.log(error);
+                    });
+                });
+            });
+        </script>
+       <%- include ("partes/piePagina") %>
+    </div>
+</body>
+
+</html>

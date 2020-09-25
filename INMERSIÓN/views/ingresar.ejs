@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+  <html lang="es">
+
+    <%- include ("partes/cabecera2") %>
+    <script src="/js/alertaTiempo.js"></script>
+
+<body class="full-cover-background" >
+    
+    <div class="form-container">
+        <p class="text-center" style="margin-top: 17px;">
+            <i class="zmdi zmdi-account-circle zmdi-hc-4x"></i>
+        </p>
+        <h4 class="text-center all-tittles" style="margin-bottom: 30px;">inicia sesión con tu cuenta</h4>
+        <% if (mensajeIngreso) { %>
+            <div id="mensaje">
+             <%= mensajeIngreso %> 
+            </div>
+        <% } %><br> <br>
+        <form action="/login" method="POST">
+
+            <div class="group-material-login">
+                <input id="correo" name="correo" type="email" autofocus class="material-login-control material-control" required="" maxlength="70">
+                <span class="highlight-login"></span>
+                <span class="bar-login"></span>
+                <label><i class="zmdi zmdi-email"></i> &nbsp; Correo electrónico</label>
+            </div><br>
+            <div class="group-material-login">
+                <input id="clave" name="clave" type="password" class="material-login-control material-control" required="" maxlength="15">
+                <span class="highlight-login"></span>
+                <span class="bar-login"></span>
+                <label><i class="zmdi zmdi-lock"></i> &nbsp; Contraseña</label>
+            </div>
+            
+            
+            <button class="btn-login" type="submit"> Ingresar al sistema &nbsp;<i class="zmdi zmdi-arrow-right"></i></button>
+            
+        </form>
+        
+            <a href="/signup"> <button class="btn-login-left" type="submit">Registarse &nbsp;</button></a>
+            <br>
+           <a href="/recuperacion"> <button class="btn-login-center" type="submit">¿Has olvidado la contraseña? &nbsp;</button></a>
+          
+    </div>
+    
+    
+
+</body>
+
+</html>
